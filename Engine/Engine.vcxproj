@@ -151,6 +151,7 @@
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Shape3D.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />

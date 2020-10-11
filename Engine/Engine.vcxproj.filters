@@ -75,6 +75,9 @@
     <ClInclude Include="WorldScreenTransformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Shape3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp">
