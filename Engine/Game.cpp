@@ -52,7 +52,8 @@ void Game::ComposeFrame()
 	{
 		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
 		{
-			gfx.DrawLine(**(curVert->begin()), **linkedVert, Colors::White);
+			gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
+				Colors::White);
 		}
 	}
 }
