@@ -4,6 +4,10 @@
 
 class WorldToScreen
 {
+	float xFac;
+	float yFac;
+
+public:
 	WorldToScreen()
 		:
 		xFac((float)Graphics::ScreenWidth / 2.0f),
@@ -15,13 +19,10 @@ class WorldToScreen
 	{
 		WorldPoint.x = (WorldPoint.x + 1.0f) * xFac;
 		WorldPoint.y = (WorldPoint.y + 1.0f) * yFac;
+		return WorldPoint;
 	}
 	Vec3 GetTransform(const Vec3& WorldPoint) const
 	{
 		return Transform(Vec3(WorldPoint));
 	}
-
-private:
-	float xFac;
-	float yFac;
 };

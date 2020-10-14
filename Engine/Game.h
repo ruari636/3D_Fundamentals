@@ -21,6 +21,9 @@
 #pragma once
 
 #include "Graphics.h"
+#include "WorldScreenTransformer.h"
+#include "Shape3D.h"
+
 
 class Game
 {
@@ -40,5 +43,7 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	Cube cube;
+	WorldToScreen w2s;
 	/********************************/
 };

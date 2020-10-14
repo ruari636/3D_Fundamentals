@@ -10,19 +10,18 @@ public:
 	_Vec3() {}
 	_Vec3(T x, T y, T z)
 		:
-		x(x),
-		y(y),
+		Vec2(x,y),
 		z(z)
 	{}
 	_Vec3(const _Vec3& vect)
 		:
-		_Vec3(vect.x, vect.y)
+		_Vec3(vect.x, vect.y, vect.z)
 	{}
-	template <typename T2>
 	explicit operator _Vec2<T>() const
 	{
 		return { x,y };
 	}
+	template <typename T2>
 	explicit operator _Vec3<T2>() const
 	{
 		return { (T2)x,(T2)y, (T2)z };

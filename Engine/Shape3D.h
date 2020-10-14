@@ -2,6 +2,12 @@
 #include "Vec3.h"
 #include <vector>
 
+struct LineList
+{
+	std::vector<Vec3> vertices;
+	std::vector<std::vector<Vec3*>> lines;
+};
+
 class Shape
 {
 public:
@@ -9,9 +15,9 @@ public:
 	{
 		return vertices;
 	}
-	std::vector<std::vector<Vec3*>> GetLines() const
+	LineList GetLines() const
 	{
-		return lines;
+		return { vertices, lines };
 	}
 
 protected:

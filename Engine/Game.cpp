@@ -24,7 +24,8 @@
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
-	gfx( wnd )
+	gfx( wnd ),
+	cube(1.0f)
 {
 }
 
@@ -42,4 +43,16 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	auto cubeDraw = cube.GetLines();
+	for (Vec3& v : cubeDraw.vertices)
+	{
+		w2s.Transform(v);
+	}
+	for (auto curVert = cubeDraw.lines.begin() + 1; curVert != cubeDraw.lines.end(); curVert++)
+	{
+		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
+		{
+			gfx.DrawLine(**(curVert->begin()), **linkedVert, Colors::White);
+		}
+	}
 }
