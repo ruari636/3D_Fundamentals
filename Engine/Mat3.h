@@ -58,6 +58,39 @@ public:
 					(T)0.0,(T)0.0,factor};
 		return s;
 	}
+	static _Mat3 RotateX(T theta)
+	{
+		T sinTheta = sin(theta);
+		T cosTheta = cos(theta);
+		return
+		{
+			(T)1, (T)0, (T)0,
+			(T)0, cosTheta, sinTheta,
+			(T)0, -sinTheta, cosTheta
+		};
+	}
+	static _Mat3 RotateY(T theta)
+	{
+		T sinTheta = sin(theta);
+		T cosTheta = cos(theta);
+		return
+		{
+			cosTheta, (T)0, -sinTheta,
+			(T)0, (T)1, (T)0,
+			sinTheta, (T)0, cosTheta
+		};
+	}
+	static _Mat3 RotateZ(T theta)
+	{
+		T sinTheta = (T)sin(theta);
+		T cosTheta = (T)cos(theta);
+		return
+		{
+			cosTheta, sinTheta, (T)0,
+			-sinTheta, cosTheta, (T)0,
+			(T)0, (T)0, (T)1
+		};
+	}
 public:
 	// [ row ][ col ]
 	T elements[3][3];

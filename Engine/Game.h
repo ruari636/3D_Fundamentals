@@ -23,6 +23,7 @@
 #include "Graphics.h"
 #include "WorldScreenTransformer.h"
 #include "Shape3D.h"
+#include "Mat3.h"
 
 
 class Game
@@ -45,5 +46,6 @@ private:
 	/*  User Variables              */
 	Cube cube;
 	WorldToScreen w2s;
+	Mat3 trans = Mat3::Identity();
 	/********************************/
 };

@@ -56,7 +56,7 @@ public:
 	{
 		x = rhs.x;
 		y = rhs.y;
-		z = rhs.z
+		z = rhs.z;
 		return *this;
 	}
 	_Vec3& operator+=(const _Vec3& rhs)

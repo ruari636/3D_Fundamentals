@@ -39,6 +39,14 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		trans = Mat3::RotateX(0.05f) * trans;
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		trans = Mat3::RotateZ(0.05f) * trans;
+	}
 }
 
 void Game::ComposeFrame()
@@ -46,6 +54,7 @@ void Game::ComposeFrame()
 	auto cubeDraw = cube.GetLines();
 	for (Vec3& v : cubeDraw.vertices)
 	{
+		v = v * trans;
 		w2s.Transform(v);
 	}
 	for (auto curVert = cubeDraw.lines.begin() + 1; curVert != cubeDraw.lines.end(); curVert++)

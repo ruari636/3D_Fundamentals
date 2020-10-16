@@ -1,0 +1,59 @@
+﻿'Engine.exe' (Win32): Loaded 'C:\Users\Owner\source\repos\ruari636\3D_Fundamentals\x64\Debug\Engine.exe'. Symbols loaded.
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ntdll.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\kernel32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\KernelBase.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\user32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\win32u.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\gdi32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\gdi32full.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\msvcp_win.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ucrtbase.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\WinSxS\amd64_microsoft.windows.gdiplus_6595b64144ccf1df_1.1.18362.1082_none_cf6c86c73eed9f8f\GdiPlus.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\d3d11.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\msvcrt.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\msvcrt.dll'. 
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\msvcrt.dll'
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\combase.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\kernel.appcore.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\rpcrt4.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\rpcrt4.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\dxgi.dll'. 
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\rpcrt4.dll'
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\bcryptprimitives.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\DXCore.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\cfgmgr32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\imm32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\uxtheme.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\msctf.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\oleaut32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\sechost.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\advapi32.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\TextInputFramework.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\CoreMessaging.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\CoreUIComponents.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\SHCore.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\WinTypes.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ntmarta.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\iertutil.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ResourcePolicyClient.dll'. 
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\ResourcePolicyClient.dll'
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\ki126754.inf_amd64_27fe88d0d60806a7\igd10iumd64.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\bcrypt.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ncrypt.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ntasn1.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\ki126754.inf_amd64_27fe88d0d60806a7\igc64.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\dwmapi.dll'. 
+'Engine.exe' (Win32): Loaded 'C:\Windows\System32\ole32.dll'. 
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\DriverStore\FileRepository\ki126754.inf_amd64_27fe88d0d60806a7\igc64.dll'
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\ntasn1.dll'
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\ncrypt.dll'
+'Engine.exe' (Win32): Unloaded 'C:\Windows\System32\DriverStore\FileRepository\ki126754.inf_amd64_27fe88d0d60806a7\igd10iumd64.dll'
+The thread 0x10b0 has exited with code 1 (0x1).
+The thread 0x79dc has exited with code 0 (0x0).
+The thread 0x571c has exited with code 0 (0x0).
+The thread 0x70fc has exited with code 0 (0x0).
+The thread 0x6e3c has exited with code 0 (0x0).
+The thread 0x7204 has exited with code 0 (0x0).
+The thread 0x5850 has exited with code 0 (0x0).
+The thread 0x6e00 has exited with code 0 (0x0).
+The program '[28676] Engine.exe' has exited with code 0 (0x0).
