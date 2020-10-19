@@ -39,13 +39,29 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	if (wnd.kbd.KeyIsPressed('W'))
 	{
 		trans = Mat3::RotateX(0.05f) * trans;
 	}
-	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	if (wnd.kbd.KeyIsPressed('S'))
+	{
+		trans = Mat3::RotateX(-0.05f) * trans;
+	}
+	if (wnd.kbd.KeyIsPressed('A'))
+	{
+		trans = Mat3::RotateY(0.05f) * trans;
+	}
+	if (wnd.kbd.KeyIsPressed('D'))
+	{
+		trans = Mat3::RotateY(-0.05f) * trans;
+	}
+	if (wnd.kbd.KeyIsPressed('Q'))
 	{
 		trans = Mat3::RotateZ(0.05f) * trans;
+	}
+	if (wnd.kbd.KeyIsPressed('E'))
+	{
+		trans = Mat3::RotateZ(-0.05f) * trans;
 	}
 }
 
@@ -57,7 +73,7 @@ void Game::ComposeFrame()
 		v = v * trans;
 		w2s.Transform(v);
 	}
-	for (auto curVert = cubeDraw.lines.begin() + 1; curVert != cubeDraw.lines.end(); curVert++)
+	for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
 	{
 		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
 		{
