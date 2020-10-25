@@ -86,8 +86,8 @@ public:
 		T cosTheta = (T)cos(theta);
 		return
 		{
-			cosTheta, sinTheta, (T)0,
-			-sinTheta, cosTheta, (T)0,
+			cosTheta, -sinTheta, (T)0,
+			sinTheta, cosTheta, (T)0,
 			(T)0, (T)0, (T)1
 		};
 	}

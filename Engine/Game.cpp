@@ -71,6 +71,7 @@ void Game::ComposeFrame()
 	for (Vec3& v : cubeDraw.vertices)
 	{
 		v = v * trans;
+		v.z += 2.0f;
 		w2s.Transform(v);
 	}
 	for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)

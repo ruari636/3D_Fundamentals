@@ -17,6 +17,8 @@ public:
 	
 	Vec3& Transform(Vec3& WorldPoint) const
 	{
+		WorldPoint.x /= WorldPoint.z;
+		WorldPoint.y /= WorldPoint.z;
 		WorldPoint.x = (WorldPoint.x + 1.0f) * xFac;
 		WorldPoint.y = (WorldPoint.y + 1.0f) * yFac;
 		return WorldPoint;
