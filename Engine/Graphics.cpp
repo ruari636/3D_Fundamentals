@@ -381,3 +381,74 @@ void Graphics::DrawLine( float x1,float y1,float x2,float y2,Color c )
 		}
 	}
 }
+
+void Graphics::DrawFlatTopTriangle(const Vec2& v0, const Vec2& v1, const Vec2& v2, Color c)
+{
+	const float dy = v2.y - v0.y;
+	const float g0 = (v2.x - v0.x) / dy;
+	const float g1 = (v2.x - v1.x) / dy;
+	const int startY = (int)ceil(v0.y - 0.5f);
+	const int endY = (int)ceil(v2.y - 0.5f);
+
+	for (int y = startY, n = 0; y != endY; n++, y++)
+	{
+		const int startX = (int)ceil(v0.x + (float)n * g0 - 0.5f);
+		const int endX = (int)ceil(v1.x + (float)n * g1 - 0.5f);
+
+		for (int x = startX; x != endX; x++)
+		{
+			PutPixel(x, y, c);
+		}
+	}
+}
+
+void Graphics::DrawFlatBottomTriangle(const Vec2& v0, const Vec2& v1, const Vec2& v2, Color c)
+{
+	const float dy = v1.y - v0.y;
+	const float g1 = (v2.x - v0.x) / dy;
+	const float g0 = (v1.x - v0.x) / dy;
+	const int startY = (int)ceil(v0.y - 0.5f);
+	const int endY = (int)ceil(v1.y - 0.5f);
+
+	for (int y = startY, n = 0; y != endY; n++, y++)
+	{
+		const int startX = (int)ceil(v0.x + (float)n * g0 - 0.5f);
+		const int endX = (int)ceil(v0.x + (float)n * g1 - 0.5f);
+
+		for (int x = startX; x != endX; x++)
+		{
+			PutPixel(x, y, c);
+		}
+	}
+}
+
+void Graphics::DrawTriangle(const Vec2& p0, const Vec2& p1, const Vec2& p2, Color c)
+{
+	const Vec2* v0 = &p0;
+	const Vec2* v1 = &p1;
+	const Vec2* v2 = &p2;
+
+	if (v0->y > v1->y) std::swap(v0, v1);
+	if (v1->y > v2->y) std::swap(v1, v2);
+	if (v0->y > v1->y) std::swap(v0, v1);
+
+	if (v0->y == v1->y)
+	{
+		if (v0->x > v1->x) std::swap(v0, v1);
+		DrawFlatTopTriangle(*v0, *v1, *v2, c);
+	}
+	else if (v1->y == v2->y)
+	{
+		if (v1->x > v2->x) std::swap(v1, v2);
+		DrawFlatBottomTriangle(*v0, *v1, *v2, c);
+	}
+	else
+	{
+		float ratio = (v1->y - v0->y) / (v2->y - v0->y);
+		const Vec2 p3 = *v0 + (*v2 - *v0) * ratio;
+		const Vec2* v3 = &p3;
+		if (v3->x < v1->x) std::swap(v1, v3);
+		DrawFlatBottomTriangle(*v0, *v1, *v3, c);
+		DrawFlatTopTriangle(*v1, *v3, *v2, c);
+	}
+}

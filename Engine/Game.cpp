@@ -68,6 +68,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	auto cubeDraw = cube.GetLines();
+	gfx.DrawTriangle({ 50.0f,50.0f }, { 100.0f,100.0f }, { 45.0f,69.0f }, Colors::Red);
 	for (Vec3& v : cubeDraw.vertices)
 	{
 		v = v * trans;
