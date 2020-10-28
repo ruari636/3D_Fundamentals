@@ -21,6 +21,18 @@
 #include "MainWindow.h"
 #include "Game.h"
 
+Color colourList[8]
+{
+	Colors::Blue,
+	Colors::Cyan,
+	Colors::Gray,
+	Colors::Green,
+	Colors::Magenta,
+	Colors::Red,
+	Colors::White,
+	Colors::Yellow
+};
+
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
@@ -68,19 +80,30 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	auto cubeDraw = cube.GetLines();
-	gfx.DrawTriangle({ 50.0f,50.0f }, { 100.0f,100.0f }, { 45.0f,69.0f }, Colors::Red);
+	auto cubeFill = cube.GetTriangles();
 	for (Vec3& v : cubeDraw.vertices)
 	{
 		v = v * trans;
 		v.z += 2.0f;
 		w2s.Transform(v);
 	}
+	int n = 0;
+	for (auto curEdge = cubeFill.triangles.begin(); curEdge != cubeFill.triangles.end(); curEdge++)
+	{
+		for (auto linkedVert = curEdge->thirdVerts.begin(); linkedVert != curEdge->thirdVerts.end(); linkedVert++)
+		{
+			gfx.DrawTriangle(cubeDraw.vertices[curEdge->lineIndex[0]], cubeDraw.vertices[curEdge->lineIndex[1]],
+				cubeDraw.vertices[*linkedVert], colourList[n % 8]);
+			n++;
+		}
+	}
+
 	for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
 	{
 		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
 		{
 			gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
-				Colors::White);
+				Colors::Red);
 		}
 	}
 }
