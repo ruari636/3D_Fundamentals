@@ -60,8 +60,8 @@ public:
 	}
 	static _Mat3 RotateX(T theta)
 	{
-		T sinTheta = sin(theta);
-		T cosTheta = cos(theta);
+		T sinTheta = (T)sin(theta);
+		T cosTheta = (T)cos(theta);
 		return
 		{
 			(T)1, (T)0, (T)0,
@@ -71,8 +71,8 @@ public:
 	}
 	static _Mat3 RotateY(T theta)
 	{
-		T sinTheta = sin(theta);
-		T cosTheta = cos(theta);
+		T sinTheta = (T)sin(theta);
+		T cosTheta = (T)cos(theta);
 		return
 		{
 			cosTheta, (T)0, -sinTheta,

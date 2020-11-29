@@ -85,25 +85,31 @@ void Game::ComposeFrame()
 	{
 		v = v * trans;
 		v.z += 2.0f;
-		w2s.Transform(v);
 	}
-	int n = 0;
-	for (auto curEdge = cubeFill.triangles.begin(); curEdge != cubeFill.triangles.end(); curEdge++)
+	for (int n = 0; n < cubeFill.triangles.size(); n += 3)
 	{
-		for (auto linkedVert = curEdge->thirdVerts.begin(); linkedVert != curEdge->thirdVerts.end(); linkedVert++)
+		Vec3 v1 = cubeDraw.vertices[cubeFill.triangles[n + 1]] - cubeDraw.vertices[cubeFill.triangles[n]];
+		Vec3 v2 = cubeDraw.vertices[cubeFill.triangles[n + 2]] - cubeDraw.vertices[cubeFill.triangles[n]];
+		cubeFill.cullList[n / 3] = (Vec3::Cross(v1, v2) * cubeDraw.vertices[cubeFill.triangles[n]]) >= 0;
+	}
+	for (Vec3& v : cubeDraw.vertices)
+	{ w2s.Transform(v);	}
+
+	for (int n = 0; n < cubeFill.triangles.size(); n += 3)
+	{
+		if (!cubeFill.cullList[n / 3])
 		{
-			gfx.DrawTriangle(cubeDraw.vertices[curEdge->lineIndex[0]], cubeDraw.vertices[curEdge->lineIndex[1]],
-				cubeDraw.vertices[*linkedVert], colourList[n % 8]);
-			n++;
+			gfx.DrawTriangle(cubeDraw.vertices[cubeFill.triangles[n]], cubeDraw.vertices[cubeFill.triangles[n + 1]],
+				cubeDraw.vertices[cubeFill.triangles[n + 2]], colourList[n % 8]);
 		}
 	}
 
-	for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
+	/*for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
 	{
 		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
 		{
 			gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
 				Colors::Red);
 		}
-	}
+	}*/
 }
