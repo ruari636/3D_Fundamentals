@@ -21,6 +21,7 @@
 #pragma once
 #include <d3d11.h>
 #include <wrl.h>
+#include <cmath>
 #include "GDIPlusManager.h"
 #include "ChiliException.h"
 #include "Surface.h"

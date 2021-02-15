@@ -41,16 +41,16 @@ public:
 		vertices.emplace_back( side,-side,side ); // 13
 		tc.emplace_back( 1.0f,0.0f );
 	}
-	IndexedLineList GetLines() const
+	/*IndexedLineList GetLines() const
 	{
 		throw std::runtime_error( "Incomplete function CubeFolded::GetLines!" );
-		//return{
-		//	vertices,{
-		//		0,1,  1,3,  3,2,  2,0,
-		//		0,4,  1,5,	3,7,  2,6,
-		//		4,5,  5,7,	7,6,  6,4 }
-		//};
-	}
+		return{
+			vertices,{
+				0,1,  1,3,  3,2,  2,0,
+				0,4,  1,5,	3,7,  2,6,
+				4,5,  5,7,	7,6,  6,4 }
+		};
+	}*/
 	IndexedTriangleList<Vec3> GetTriangles() const
 	{
 		return{
