@@ -21,23 +21,11 @@
 #include "MainWindow.h"
 #include "Game.h"
 
-Color colourList[8]
-{
-	Colors::Blue,
-	Colors::Cyan,
-	Colors::Gray,
-	Colors::Green,
-	Colors::Magenta,
-	Colors::Red,
-	Colors::White,
-	Colors::Yellow
-};
-
 Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	cube(1.0f)
+	scene()
 {
 }
 
@@ -51,65 +39,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	if (wnd.kbd.KeyIsPressed('W'))
-	{
-		trans = Mat3::RotateX(0.05f) * trans;
-	}
-	if (wnd.kbd.KeyIsPressed('S'))
-	{
-		trans = Mat3::RotateX(-0.05f) * trans;
-	}
-	if (wnd.kbd.KeyIsPressed('A'))
-	{
-		trans = Mat3::RotateY(0.05f) * trans;
-	}
-	if (wnd.kbd.KeyIsPressed('D'))
-	{
-		trans = Mat3::RotateY(-0.05f) * trans;
-	}
-	if (wnd.kbd.KeyIsPressed('Q'))
-	{
-		trans = Mat3::RotateZ(0.05f) * trans;
-	}
-	if (wnd.kbd.KeyIsPressed('E'))
-	{
-		trans = Mat3::RotateZ(-0.05f) * trans;
-	}
+	scene.Update(wnd.kbd, wnd.mouse, 0.05f);
 }
 
 void Game::ComposeFrame()
 {
-	auto cubeDraw = cube.GetLines();
-	auto cubeFill = cube.GetTriangles();
-	for (Vec3& v : cubeDraw.vertices)
-	{
-		v = v * trans;
-		v.z += 2.0f;
-	}
-	for (int n = 0; n < cubeFill.triangles.size(); n += 3)
-	{
-		Vec3 v1 = cubeDraw.vertices[cubeFill.triangles[n + 1]] - cubeDraw.vertices[cubeFill.triangles[n]];
-		Vec3 v2 = cubeDraw.vertices[cubeFill.triangles[n + 2]] - cubeDraw.vertices[cubeFill.triangles[n]];
-		cubeFill.cullList[n / 3] = (Vec3::Cross(v1, v2) * cubeDraw.vertices[cubeFill.triangles[n]]) >= 0;
-	}
-	for (Vec3& v : cubeDraw.vertices)
-	{ w2s.Transform(v);	}
-
-	for (int n = 0; n < cubeFill.triangles.size(); n += 3)
-	{
-		if (!cubeFill.cullList[n / 3])
-		{
-			gfx.DrawTriangle(cubeDraw.vertices[cubeFill.triangles[n]], cubeDraw.vertices[cubeFill.triangles[n + 1]],
-				cubeDraw.vertices[cubeFill.triangles[n + 2]], colourList[n % 8]);
-		}
-	}
-
-	/*for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
-	{
-		for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
-		{
-			gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
-				Colors::Red);
-		}
-	}*/
+	scene.Draw(gfx);
 }
