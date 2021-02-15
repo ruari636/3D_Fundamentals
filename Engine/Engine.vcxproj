@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -136,50 +136,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ConcaveHexahedron.h" />
-    <ClInclude Include="ConHexScene.h" />
-    <ClInclude Include="ConHexWireScene.h" />
-    <ClInclude Include="CubeFolded.h" />
-    <ClInclude Include="CubeFoldedWrap.h" />
-    <ClInclude Include="CubeOrderScene.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliMath.h" />
     <ClInclude Include="ChiliWin.h" />
     <ClInclude Include="Colors.h" />
-    <ClInclude Include="Cube.h" />
-    <ClInclude Include="CubeSkinned.h" />
-    <ClInclude Include="CubeSkinnedScene.h" />
     <ClInclude Include="DXErr.h" />
-    <ClInclude Include="FoldedCubeScene.h" />
-    <ClInclude Include="FoldedCubeWrapScene.h" />
-    <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GDIPlusManager.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="SolidCubeScene.h" />
-    <ClInclude Include="IndexedLineList.h" />
-    <ClInclude Include="IndexedTriangleList.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Mat2.h" />
     <ClInclude Include="Mat3.h" />
     <ClInclude Include="Mouse.h" />
-    <ClInclude Include="PubeScreenTransformer.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Shape3D.h" />
     <ClInclude Include="Surface.h" />
-    <ClInclude Include="TexCubeScene.h" />
-    <ClInclude Include="TexVertex.h" />
-    <ClInclude Include="TexWrapCubeScene.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
-    <ClInclude Include="XMutualScene.h" />
-    <ClInclude Include="XQuads.h" />
+    <ClInclude Include="WorldScreenTransformer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DXErr.cpp" />
-    <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GDIPlusManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
