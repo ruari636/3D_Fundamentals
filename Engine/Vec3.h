@@ -34,6 +34,10 @@ public:
 	{
 		return sqrt(LenSq());
 	}
+	T operator*(const _Vec3& rhs)
+	{
+		return x * rhs.x + y * rhs.y + z * rhs.z;
+	}
 	_Vec3& Normalize()
 	{
 		const T length = Len();
@@ -47,6 +51,12 @@ public:
 		_Vec3 norm = *this;
 		norm.Normalize();
 		return norm;
+	}
+	static _Vec3 Cross(_Vec3 v1, _Vec3 v2)
+	{
+		return{ v1.y * v2.z - v1.z * v2.y,
+			    v1.z * v2.x - v1.x * v2.z,
+			    v1.x * v2.y - v1.y * v2.x };
 	}
 	_Vec3	operator-() const
 	{

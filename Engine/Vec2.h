@@ -87,7 +87,7 @@ public:
 	T		operator*( const _Vec2 &rhs ) const
 	{
 		return x * rhs.x + y * rhs.y;
-	}	
+	}
 	_Vec2	operator+( const _Vec2 &rhs ) const
 	{
 		return _Vec2( *this ) += rhs;

@@ -8,6 +8,13 @@ struct LineList
 	std::vector<std::vector<int>> lines;
 };
 
+struct TriList
+{
+	std::vector<Vec3> vertices;
+	std::vector<int> triangles;
+	std::vector<bool> cullList;
+};
+
 class Shape
 {
 public:
@@ -19,11 +26,16 @@ public:
 	{
 		return { vertices, lines };
 	}
-
+	TriList GetTriangles() const
+	{
+		return { vertices,triangles,cullList };
+	}
 protected:
 	std::vector<Vec3> vertices; //The world locations of the vertices
 	std::vector<std::vector<int>> lines; //Stores lines from the first vertex
-										   //in each vector to all the other vertices
+										 //in each vector to all the other vertices
+	std::vector<int> triangles;
+	std::vector<bool> cullList;
 };
 
 class Cube : public Shape
@@ -48,5 +60,19 @@ public:
 		lines.emplace_back(std::vector<int>{3, 1, 2}); //top front right to remaining connected
 		lines.emplace_back(std::vector<int>{5, 1, 4}); //bottom back right to remaining connected
 		lines.emplace_back(std::vector<int>{6, 2, 4}); //top back left to remaining connected
+
+		triangles.insert(triangles.end(), { 0, 2, 1 });
+		triangles.insert(triangles.end(), { 0, 1, 4 });
+		triangles.insert(triangles.end(), { 0, 4, 2 });
+		triangles.insert(triangles.end(), { 4, 6, 2 });
+		triangles.insert(triangles.end(), { 4, 1, 5 });
+		triangles.insert(triangles.end(), { 2, 3, 1 });
+		triangles.insert(triangles.end(), { 2, 6, 3 });
+		triangles.insert(triangles.end(), { 4, 5, 6 });
+		triangles.insert(triangles.end(), { 6, 5, 7 });
+		triangles.insert(triangles.end(), { 1, 3, 7 });
+		triangles.insert(triangles.end(), { 1, 7, 5 });
+		triangles.insert(triangles.end(), { 6, 7, 3 });
+		cullList.resize(12);
 	}
 };
