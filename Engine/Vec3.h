@@ -58,6 +58,16 @@ public:
 			    v1.z * v2.x - v1.x * v2.z,
 			    v1.x * v2.y - v1.y * v2.x };
 	}
+	_Vec3& Interpolate(_Vec3 V1, float alpha)
+	{
+		*this += (V1 - *this) * alpha;
+		return *this;
+	}
+	_Vec3 GetInterpolated(_Vec3 V1, float alpha) const
+	{
+		Vec3 ans = *this;
+		return ans.Interpolate(V1, alpha);
+	}
 	_Vec3	operator-() const
 	{
 		return _Vec3(-x, -y, -z);

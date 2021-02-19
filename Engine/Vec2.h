@@ -62,6 +62,16 @@ public:
 		norm.Normalize();
 		return norm;
 	}
+	_Vec2& Interpolate(_Vec2 V1, float alpha)
+	{
+		*this += (V1 - *this) * alpha;
+		return *this;
+	}
+	_Vec2 GetInterpolated(_Vec2 V1, float alpha) const
+	{
+		Vec2 ans = *this;
+		return ans.Interpolate(V1, alpha);
+	}
 	_Vec2	operator-() const
 	{
 		return _Vec2( -x,-y );
@@ -124,7 +134,7 @@ public:
 	{
 		return !(*this == rhs);
 	}
-public:
+
 	T x;
 	T y;
 };

@@ -20,6 +20,8 @@ class BasicCubeScene : public Scene
 		Colors::White,
 		Colors::Yellow
 	};
+	bool HeldDown = false;
+	bool EdgeHighlight = false;
 
 public:
 	BasicCubeScene()
@@ -54,10 +56,19 @@ public:
 		{
 			trans = Mat3::RotateZ(-dt) * trans;
 		}
+		if (kbd.KeyIsPressed('H'))
+		{
+			if (!HeldDown)
+			{
+				EdgeHighlight = !EdgeHighlight;
+				HeldDown = true;
+			}
+		}
+		else { HeldDown = false; }
 	}
 	void Draw(Graphics& gfx) override
 	{
-		auto cubeDraw = cube.GetLines();
+		auto cubeDraw = cube.GetEdges();
 		auto cubeFill = cube.GetTriangles();
 		for (Vec3& v : cubeDraw.vertices)
 		{
@@ -83,13 +94,16 @@ public:
 					cubeDraw.vertices[cubeFill.triangles[n + 2]], colourList[n % 8]);
 			}
 		}
-		/*for (auto curVert = cubeDraw.lines.begin(); curVert != cubeDraw.lines.end(); curVert++)
+		if (EdgeHighlight)
 		{
-			for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
+			for (auto curVert = cubeDraw.edges.begin(); curVert != cubeDraw.edges.end(); curVert++)
 			{
-				gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
-					Colors::Red);
+				for (auto linkedVert = curVert->begin() + 1; linkedVert != curVert->end(); linkedVert++)
+				{
+					gfx.DrawLine(cubeDraw.vertices[*(curVert->begin())], cubeDraw.vertices[*linkedVert],
+						Colors::Red);
+				}
 			}
-		}*/
+		}
 	}
 };
