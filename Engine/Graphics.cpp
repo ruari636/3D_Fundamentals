@@ -422,6 +422,72 @@ void Graphics::DrawFlatBottomTriangle(const Vec2& v0, const Vec2& v1, const Vec2
 	}
 }
 
+void Graphics::DrawFlatTopTriangleTex(const TexVec& v0, const TexVec& v1, const TexVec& v2, const Surface& Tex)
+{
+	const float dy = v2.y - v0.y;
+	const float g0 = (v2.x - v0.x) / dy;
+	const float g1 = (v2.x - v1.x) / dy;
+	const int startY = (int)ceil(v0.y - 0.5f);
+	const int endY = (int)ceil(v2.y - 0.5f);
+	const float TexWidth = float(Tex.GetWidth());
+	const float TexHeight = float(Tex.GetHeight());
+	const float uClamp = TexWidth - 1.0f;
+	const float vClamp = TexHeight - 1.0f;
+
+	Vec2 v0v2uvStep = (v2.uv - v0.uv) / dy;
+	Vec2 v1v2uvStep = (v2.uv - v1.uv) / dy;
+
+	Vec2 v0v2CurUV = v0v2uvStep * (startY - v0.y + 0.5f) + v0.uv; //+ 0.5f ia there to account for us looking up in the texture at a
+	Vec2 v1v2CurUV = v1v2uvStep * (startY - v0.y + 0.5f) + v1.uv;//pixels center point
+
+	Vec2 v0v1uvStep = (v1.uv - v0.uv) / (v1.x - v0.x);
+
+	for (int y = startY, n = 0; y != endY; n++, y++, v0v2CurUV += v0v2uvStep, v1v2CurUV += v1v2uvStep)
+	{
+		const int startX = (int)ceil(v0.x + (float)n * g0 - 0.5f);
+		const int endX = (int)ceil(v1.x + (float)n * g1 - 0.5f);
+		Vec2 uvStart = v0v1uvStep * (float(startX) - v0.x + 0.5f) + v0v2CurUV;
+
+		for (int x = startX; x != endX; x++, uvStart += v0v1uvStep)
+		{								//making sure we don't look outside Tex
+			PutPixel(x, y, Tex.GetPixel(std::max(0.0f, std::min(uvStart.x * TexWidth, uClamp)), std::max(0.0f, std::min(uvStart.y * TexHeight, vClamp))));
+		}
+	}
+}
+
+void Graphics::DrawFlatBottomTriangleTex(const TexVec& v0, const TexVec& v1, const TexVec& v2, const Surface& Tex)
+{
+	const float dy = v1.y - v0.y;
+	const float g1 = (v2.x - v0.x) / dy;
+	const float g0 = (v1.x - v0.x) / dy;
+	const int startY = (int)ceil(v0.y - 0.5f);
+	const int endY = (int)ceil(v1.y - 0.5f);
+	const float TexWidth = float(Tex.GetWidth());
+	const float TexHeight = float(Tex.GetHeight());
+	const float uClamp = TexWidth - 1.0f;
+	const float vClamp = TexHeight - 1.0f;
+
+	Vec2 v0v1uvStep = (v1.uv - v0.uv) / dy;
+	Vec2 v0v2uvStep = (v2.uv - v0.uv) / dy;\
+
+	Vec2 v0v1CurUV = v0v1uvStep * (startY - v0.y + 0.5f) + v0.uv;//+ 0.5f ia there to account for us looking up in the texture at a
+	Vec2 v0v2CurUV = v0v2uvStep * (startY - v0.y + 0.5f) + v1.uv;//pixels center point
+
+	Vec2 v1v2uvStep = (v2.uv - v1.uv) / (v2.x - v1.x);
+
+	for (int y = startY, n = 0; y != endY; n++, y++)
+	{
+		const int startX = (int)ceil(v0.x + (float)n * g0 - 0.5f);
+		const int endX = (int)ceil(v0.x + (float)n * g1 - 0.5f);
+		Vec2 uvStart = v0v1uvStep * (float(startX) - v0.x + 0.5f) + v0v1CurUV;
+
+		for (int x = startX; x != endX; x++, uvStart += v1v2uvStep)
+		{								//making sure we don't look outside Tex
+			PutPixel(x, y, Tex.GetPixel(std::max(0.0f, std::min(uvStart.x * TexWidth, uClamp)), std::max(0.0f, std::min(uvStart.y * TexHeight, vClamp))));
+		}
+	}
+}
+
 void Graphics::DrawTriangle(const Vec2& p0, const Vec2& p1, const Vec2& p2, Color c)
 {
 	const Vec2* v0 = &p0;
@@ -450,5 +516,36 @@ void Graphics::DrawTriangle(const Vec2& p0, const Vec2& p1, const Vec2& p2, Colo
 		if (v3->x < v1->x) std::swap(v1, v3);
 		DrawFlatBottomTriangle(*v0, *v1, *v3, c);
 		DrawFlatTopTriangle(*v1, *v3, *v2, c);
+	}
+}
+
+void Graphics::DrawTriangleTex(const TexVec& p0, const TexVec& p1, const TexVec& p2, const Surface& Tex)
+{
+	const TexVec* v0 = &p0;
+	const TexVec* v1 = &p1;
+	const TexVec* v2 = &p2;
+
+	if (v0->y > v1->y) std::swap(v0, v1);
+	if (v1->y > v2->y) std::swap(v1, v2);
+	if (v0->y > v1->y) std::swap(v0, v1);
+
+	if (v0->y == v1->y)
+	{
+		if (v0->x > v1->x) std::swap(v0, v1);
+		DrawFlatTopTriangleTex(*v0, *v1, *v2, Tex);
+	}
+	else if (v1->y == v2->y)
+	{
+		if (v1->x > v2->x) std::swap(v1, v2);
+		DrawFlatBottomTriangleTex(*v0, *v1, *v2, Tex);
+	}
+	else
+	{
+		float ratio = (v1->y - v0->y) / (v2->y - v0->y);
+		const TexVec p3 = *v0 + (*v2 - *v0) * ratio;
+		const TexVec* v3 = &p3;
+		if (v3->x < v1->x) std::swap(v1, v3);
+		DrawFlatBottomTriangleTex(*v0, *v1, *v3, Tex);
+		DrawFlatTopTriangleTex(*v1, *v3, *v2, Tex);
 	}
 }

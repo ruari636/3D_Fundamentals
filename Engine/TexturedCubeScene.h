@@ -88,13 +88,8 @@ public:
 			}
 		}
 
-		for (unsigned int x = 0; x < Face.GetWidth(); x++)
-		{
-			for (unsigned int y = 0; y < Face.GetHeight(); y++)
-			{
-				gfx.PutPixel(x + 108, y + 108, Face.GetPixel(x, y));
-			}
-		}
+		gfx.DrawTriangleTex(TexVec({ 0.0f,0.0f }, { 0.0f,0.0f,1.0f }), TexVec({ 1.0f, 0.0f }, { (float)Graphics::ScreenWidth - 1.0f, 0.0f, 1.0f }),
+			TexVec({ 0.0f, 1.0f }, { 0.0f, (float)Graphics::ScreenHeight - 1.0f, 1.0f }), Face);
 
 		if (EdgeHighlight)
 		{

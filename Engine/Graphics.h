@@ -26,6 +26,7 @@
 #include "Surface.h"
 #include "Colors.h"
 #include "Vec2.h"
+#include "TexVec.h"
 
 #define CHILI_GFX_EXCEPTION( hr,note ) Graphics::Exception( hr,note,_CRT_WIDE(__FILE__),__LINE__ )
 
@@ -65,9 +66,12 @@ public:
 private:
 	void DrawFlatTopTriangle(const Vec2& v0, const Vec2& v1, const Vec2& v2, Color c);
 	void DrawFlatBottomTriangle(const Vec2& v0, const Vec2& v1, const Vec2& v2, Color c);
+	void DrawFlatTopTriangleTex(const TexVec& v0, const TexVec& v1, const TexVec& v2, const Surface& Tex);
+	void DrawFlatBottomTriangleTex(const TexVec& v0, const TexVec& v1, const TexVec& v2, const Surface& Tex);
 
 public:
 	void DrawTriangle(const Vec2& p0, const Vec2& p1, const Vec2& p2, Color c);
+	void DrawTriangleTex(const TexVec& p0, const TexVec& p1, const TexVec& p2, const Surface& Tex);
 	void PutPixel( int x,int y,int r,int g,int b )
 	{
 		PutPixel( x,y,{ unsigned char( r ),unsigned char( g ),unsigned char( b ) } );
