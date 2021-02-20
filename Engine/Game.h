@@ -25,6 +25,7 @@
 #include "Shape3D.h"
 #include "Mat3.h"
 #include "BasicCubeScene.h"
+#include "TexturedCubeScene.h"
 
 class Game
 {
@@ -45,5 +46,6 @@ private:
 	/********************************/
 	/*  User Variables              */
 	BasicCubeScene scene;
+	TexturedCubeScene test;
 	/********************************/
 };

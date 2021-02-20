@@ -25,7 +25,8 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	scene()
+	scene(),
+	test(L"MirrorFace.png")
 {
 }
 
@@ -39,10 +40,12 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	scene.Update(wnd.kbd, wnd.mouse, 0.05f);
+	//scene.Update(wnd.kbd, wnd.mouse, 0.05f);
+	test.Update(wnd.kbd, wnd.mouse, 0.05f);
 }
 
 void Game::ComposeFrame()
 {
-	scene.Draw(gfx);
+	//scene.Draw(gfx);
+	test.Draw(gfx);
 }

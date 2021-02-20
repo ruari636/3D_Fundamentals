@@ -1,33 +1,26 @@
 #pragma once
+#include <string>
 #include "Scene.h"
 #include "Mat3.h"
 #include "Shape3D.h"
 #include "WorldScreenTransformer.h"
+#include "Surface.h"
 
-class BasicCubeScene : public Scene
+class TexturedCubeScene : public Scene
 {
 	Mat3 trans = Mat3::Identity();
 	Cube cube;
+	Surface Face;
 	WorldToScreen w2s;
-	Color colourList[8]
-	{
-		Colors::Blue,
-		Colors::Cyan,
-		Colors::Gray,
-		Colors::Green,
-		Colors::Magenta,
-		Colors::Red,
-		Colors::White,
-		Colors::Yellow
-	};
 	bool HeldDown = false;
 	bool EdgeHighlight = false;
 
 public:
-	BasicCubeScene()
+	TexturedCubeScene(const std::wstring& TextureFile)
 		:
 		cube(1.0f),
-		Scene( "Basic Cube With Distinguishable Triangles" )
+		Scene("Basic Cube With : " + std::string(TextureFile.begin(), TextureFile.end()) + " Texture Applied"),
+		Face(Surface::FromFile(TextureFile))
 	{
 	}
 	void Update(Keyboard& kbd, Mouse& mouse, float dt) override
@@ -90,10 +83,19 @@ public:
 		{
 			if (!cubeFill.cullList[n / 3])
 			{
-				gfx.DrawTriangle(cubeDraw.vertices[cubeFill.triangles[n]], cubeDraw.vertices[cubeFill.triangles[n + 1]],
-					cubeDraw.vertices[cubeFill.triangles[n + 2]], colourList[n % 8]);
+				//gfx.DrawTriangle(cubeDraw.vertices[cubeFill.triangles[n]], cubeDraw.vertices[cubeFill.triangles[n + 1]],
+				//	cubeDraw.vertices[cubeFill.triangles[n + 2]], colourList[n % 8]);
 			}
 		}
+
+		for (unsigned int x = 0; x < Face.GetWidth(); x++)
+		{
+			for (unsigned int y = 0; y < Face.GetHeight(); y++)
+			{
+				gfx.PutPixel(x + 108, y + 108, Face.GetPixel(x, y));
+			}
+		}
+
 		if (EdgeHighlight)
 		{
 			for (auto curVert = cubeDraw.edges.begin(); curVert != cubeDraw.edges.end(); curVert++)
